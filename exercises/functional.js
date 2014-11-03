@@ -6,7 +6,16 @@ var exercises = {};
 // lodash to return the first string containing the substring
 // "waldo"
 exercises.wheresWaldo = function() {
-  // TODO: implement me
+	var _, temp;
+	_ = require("lodash");
+	temp = "";
+	args = Array.prototype.slice.call(arguments);
+	_.each((args), function(val, index) {
+		if ((temp === "") && (val.indexOf("waldo") > -1)) {
+		temp = index; return (temp);
+		}
+	});
+	return args[temp];
 };
 
 // 8 points
@@ -14,7 +23,13 @@ exercises.wheresWaldo = function() {
 // array holding the largest number in each sub-array.
 // use _.chain() and _.map() and _.max()
 exercises.largestNums = function(arrayOfNumberArrays) {
-  // TODO: implement me
+	var _, args, maxArray;
+	_ = require("lodash");
+	args = Array.prototype.slice.call(arrayOfNumberArrays);
+	maxArray =  _.chain(args)
+			.map (function(nums) { return _.max(nums);})
+			.value();
+	return maxArray;
 };
 
 // 8 points
@@ -22,6 +37,11 @@ exercises.largestNums = function(arrayOfNumberArrays) {
 // use the lodash _.filter() method to return an array with all
 // the objects from dates that fit within the given boundaries
 exercises.filterDates = function(dates, lowerBound, upperBound) {
+	var answer, _;
+	_ = require("lodash");
+	answer = _.filter(dates, function(date) {
+		return ((date >= lowerBound) && (date <= upperBound));});
+	return answer;
   // TODO: implement me
 };
 
@@ -29,7 +49,12 @@ exercises.filterDates = function(dates, lowerBound, upperBound) {
 // make up your own exercise like those above. implement it and
 // write a test for it in tests/functional.spec.js.
 // for 4 extra credit points, use _.reduce()
-// exercises.TODO = function(array) {
-// };
+// takes an array of numbers and returns the sum of the array
+exercises.TODO = function(array) {
+	var _ = require("lodash");
+	return _.reduce(array, function(sum, val) {
+               return sum + val;
+}, 0);
+};
 
 module.exports = exercises;
